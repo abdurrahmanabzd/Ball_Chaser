@@ -26,24 +26,24 @@ void process_image_callback(const sensor_msgs::Image img)
   
     for (int i = 0; i < img.height; i++) {
       for (int j = 0; j < img.step; j++) {  
-            if (img.data[i,j] = white_pixel) {
+            if (img.data[i,j] == white_pixel) {
             uniform_image = true;
-            position = j
+            position = j;
             break;
         }
         
       }
     // Then, identify if this pixel falls in the left, mid, or right side of the image
-        std::string side;
+       //std::string side;
         
         if ( position < img.step/3 ) {
-          side = left; 
+          //side = left; 
           drive_robot(0.2,-0.3); }
         else if ( (position > img.step/3) && (position < (img.step/3)*2)) {
-          side = center;
+          //side = center;
           drive_robot(0.5,0.0); }
         else {
-          side = right; 
+          //side = right; 
           drive_robot(0.2,0.3); }
         
       
@@ -52,6 +52,8 @@ void process_image_callback(const sensor_msgs::Image img)
     // Request a stop when there's no white ball seen by the camera
      if (uniform_image == true){
        drive_robot(0.0,0.0);
+     }
+    }
 }
 
 int main(int argc, char** argv)
